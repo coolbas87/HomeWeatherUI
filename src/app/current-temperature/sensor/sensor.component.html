@@ -1,0 +1,10 @@
+<div [class]="sensorClass">
+  <span class="info-box-icon"><i class="fas fa-thermometer-half"></i></span>
+  <div class="info-box-content">
+    <span class="info-box-text">{{sensor.name}}</span>
+    <span class="info-box-number">{{sensor.temperature  | number:'1.1-1'}}</span>
+  </div>
+  <div *ngIf="isLoading" class="overlay">
+    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+  </div>
+</div>

@@ -24,9 +24,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/static/css/fontawesome-free/css/all.css",
+              "src/static/css/adminlte.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/static/js/jquery.min.js",
+              "src/static/js/jquery.slimscroll.min.js",
+              "src/static/js/bootstrap.min.js",
+              "src/static/js/adminlte.min.js",
+              "src/static/js/fontawesome-free/all.min.js"
+            ]
           },
           "configurations": {
             "production": {
