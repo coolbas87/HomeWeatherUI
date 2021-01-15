@@ -1,14 +1,12 @@
-<div class="content-wrapper" style="marginLeft: 0">
-  <div class="container-fluid">
-    <section class="content-header">
-      <h4>Active sensors</h4>
-    </section>
-    <section class="content">
-      <div class="row" *ngFor="let group of groupedSensors">
-        <div class="col" *ngFor="let sensor of group">
-          <app-sensor [sensor]="sensor"></app-sensor>
-        </div>
+<div class="container-fluid">
+  <section class="content-header">
+    <h4>Active sensors</h4>
+  </section>
+  <section class="content">
+    <div class="row" *ngFor="let group of groupedSensors">
+      <div class="col" *ngFor="let sensor of group">
+        <app-sensor [sensor]="sensor"></app-sensor>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </div>
