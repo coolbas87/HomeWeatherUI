@@ -34,7 +34,8 @@
               "src/static/js/jquery.slimscroll.min.js",
               "src/static/js/bootstrap.min.js",
               "src/static/js/adminlte.min.js",
-              "src/static/js/fontawesome-free/all.min.js"
+              "src/static/js/fontawesome-free/all.min.js",
+              "node_modules/chart.js/dist/chart.js"
             ]
           },
           "configurations": {

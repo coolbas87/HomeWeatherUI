@@ -7,8 +7,7 @@ import { TempHistoryComponent } from './temp-history/temp-history.component';
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: CurrentTemperatureComponent },
-  { path: 'TempHistory/:snID/:from/:to', component: TempHistoryComponent },
-  { path: 'TempHistory/:from/:to', component: TempHistoryComponent },
+  { path: 'TempHistory/:snID', component: TempHistoryComponent },
   { path: 'TempHistory', component: TempHistoryComponent }
 ];
 

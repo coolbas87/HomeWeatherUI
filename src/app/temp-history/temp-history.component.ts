@@ -10,18 +10,46 @@ import * as moment from 'moment';
   styleUrls: ['./temp-history.component.css']
 })
 export class TempHistoryComponent implements OnInit {
-  @Input() from;
-  @Input() to;
-  @Input() id;
-  data: Date[];
+  readonly TEXT_CLASS_NAME = 'text-';
+  readonly DATE_FORMAT = 'YYYY-MM-DD';
+  readonly USER_DATE_FORMAT = 'DD.MM.YYYY';
 
-  readonly  ROW_CLASS_NAME = 'table-';
-  readonly  DATE_FORMAT = 'YYYY-MM-DD';
   history: TempHistoryItem[];
+
+  get dateFrom(): any {
+    const from = sessionStorage.getItem('from');
+    return from != null ? from : moment().subtract(7, 'days').format(this.DATE_FORMAT);
+  }
+  @Input() set dateFrom(value: any) {
+    sessionStorage.setItem('from', moment(value).format(this.DATE_FORMAT));
+  }
+
+  get dateTo(): any {
+    const to = sessionStorage.getItem('to');
+    return to != null ? to : moment().format(this.DATE_FORMAT);
+  }
+  @Input() set dateTo(value: any) {
+    sessionStorage.setItem('to', moment(value).format(this.DATE_FORMAT));
+  }
+
+  get dateFromForView(): Date {
+    return moment(this.dateFrom, this.DATE_FORMAT).toDate();
+  }
+
+  get dateToForView(): Date {
+    return moment(this.dateTo, this.DATE_FORMAT).toDate();
+  }
+
+  @Input() id;
 
   constructor(private tempHistoryService: TempHistoryService, private route: ActivatedRoute) { }
 
-  getRowColor(temperature: number): string {
+  ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('snID');
+    this.getHistory();
+  }
+
+  getTextColor(temperature: number): string {
     let clsName = '';
 
     if (temperature >= 30) {
@@ -33,50 +61,48 @@ export class TempHistoryComponent implements OnInit {
     } else if (temperature >= -15) {
       clsName = 'primary';
     } else if (temperature >= -30) {
-      clsName = 'purple';
+      clsName = 'secondary';
     } else {
       clsName = 'light';
     }
-    return this.ROW_CLASS_NAME + clsName;
-  }
-
-  ngOnInit(): void {
-    this.setDefaultDates();
-    this.getHistory();
-  }
-
-  private setDefaultDates(): void {
-    this.from = !this.from ? moment().subtract(7, 'days').format(this.DATE_FORMAT) : this.from;
-    this.to = !this.to ? moment().format(this.DATE_FORMAT) : this.to;
+    return this.TEXT_CLASS_NAME + clsName;
   }
 
   private getHistory() {
-    const id = this.route.snapshot.paramMap.get('snID');
-    if (!id) {
-      this.tempHistoryService.getTempHistory(this.from, this.to)
+    if (!this.id) {
+      this.tempHistoryService.getTempHistory(this.dateFrom, this.dateTo)
         .subscribe(history => {
           this.history = history;
         });
     } else {
-      this.tempHistoryService.getTempHistoryByID(+id, this.from, this.to)
+      this.tempHistoryService.getTempHistoryByID(+this.id, this.dateFrom, this.dateTo)
         .subscribe(history => {
           this.history = history;
         });
     }
+  }
+
+  public isShowChart(): boolean {
+    return (this.id != null) && (this.history != null);
   }
 
   public onShowClick(): void {
     this.getHistory();
   }
 
-  public onDateChange(dates: Date[]): void {
-    if ((!dates) || (dates.length !== 2)) {
-      this.from = null;
-      this.to = null;
-      this.setDefaultDates();
+  public onDateFromChange(date: Date): void {
+    if (!date) {
+      this.dateFrom = null;
     } else {
-      this.from = moment(dates[0]).format(this.DATE_FORMAT);
-      this.to = moment(dates[1]).format(this.DATE_FORMAT);
+      this.dateFrom = date;
+    }
+  }
+
+  public onDateToChange(date: Date): void {
+    if (!date) {
+      this.dateTo = null;
+    } else {
+      this.dateTo = date;
     }
   }
 }
