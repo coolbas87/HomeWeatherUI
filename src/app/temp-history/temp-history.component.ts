@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TempHistoryItem} from '../temp-history-item';
-import {TempHistoryService} from '../temp-history.service';
+import {TempHistoryItem} from '../interfaces/temp-history-item';
+import {TempHistoryService} from '../services/temp-history.service';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 

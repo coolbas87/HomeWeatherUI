@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {TempHistoryItem} from './temp-history-item';
+import {TempHistoryItem} from '../interfaces/temp-history-item';
 import { DatePipe } from '@angular/common';
 
 @Injectable({

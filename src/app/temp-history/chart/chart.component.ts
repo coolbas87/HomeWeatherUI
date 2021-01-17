@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {TempHistoryItem} from '../../temp-history-item';
+import {TempHistoryItem} from '../../interfaces/temp-history-item';
 import * as moment from 'moment';
 import {ChartType} from 'chart.js';
 

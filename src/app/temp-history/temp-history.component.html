@@ -14,43 +14,45 @@
         </div>
       </div>
       <div class="card-body">
-        <div class="row">
-          <label class="col-xs-2 col-form-label">From</label>
-          <div class="col-xs-12 col-12 col-md-2 form-group input-group">
-            <input type="text"
-                   [bsValue]="dateFromForView"
-                   placeholder="From"
-                   #dpFrom="bsDatepicker"
-                   class="form-control"
-                   bsDatepicker
-                   placement="bottom left"
-                   (bsValueChange)="onDateFromChange($event)"
-                   triggers=""
-                   [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
-                  clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
-            <div class="input-group-append">
-              <button class="btn btn-block btn-default" (click)="dpFrom.toggle()"><i class="far fa-calendar-alt"></i></button>
+        <div class="container-left">
+          <div class="row">
+            <label class="col-md-1 col-form-label">From</label>
+            <div class="col-md-2 form-group input-group">
+              <input type="text"
+                     [bsValue]="dateFromForView"
+                     placeholder="From"
+                     #dpFrom="bsDatepicker"
+                     class="form-control"
+                     bsDatepicker
+                     placement="bottom left"
+                     (bsValueChange)="onDateFromChange($event)"
+                     triggers=""
+                     [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
+                    clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
+              <div class="input-group-append">
+                <button class="btn btn-block btn-default" (click)="dpFrom.toggle()"><i class="far fa-calendar-alt"></i></button>
+              </div>
             </div>
-          </div>
-          <label class="col-xs-2 col-form-label">To</label>
-          <div class="col-xs-12 col-12 col-md-2 form-group input-group">
-            <input type="text"
-                   [bsValue]="dateToForView"
-                   placeholder="To"
-                   #dpTo="bsDatepicker"
-                   class="form-control"
-                   bsDatepicker
-                   placement="bottom left"
-                   triggers=""
-                   (bsValueChange)="onDateToChange($event)"
-                   [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
-                  clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
-            <div class="input-group-append">
-              <button class="btn btn-block btn-default" (click)="dpTo.toggle()"><i class="far fa-calendar-alt"></i></button>
+            <label class="col-md-1 col-form-label">To</label>
+            <div class="col-md-2 form-group input-group">
+              <input type="text"
+                     [bsValue]="dateToForView"
+                     placeholder="To"
+                     #dpTo="bsDatepicker"
+                     class="form-control"
+                     bsDatepicker
+                     placement="bottom left"
+                     triggers=""
+                     (bsValueChange)="onDateToChange($event)"
+                     [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
+                    clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
+              <div class="input-group-append">
+                <button class="btn btn-block btn-default" (click)="dpTo.toggle()"><i class="far fa-calendar-alt"></i></button>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-1">
-            <button class="btn btn-block bg-gradient-primary" (click)="onShowClick()">Show</button>
+            <div class="col-lg-1">
+              <button class="btn btn-block bg-gradient-primary" (click)="onShowClick()">Show</button>
+            </div>
           </div>
         </div>
       </div>

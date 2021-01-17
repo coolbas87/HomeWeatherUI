@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <section class="content-header">
+    <h4>Connected sensors</h4>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="alert alert-default-primary alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h5><i class="icon fas fa-info"></i> Note:</h5>
+          All sensors with ID less than 1 are not registered in DB. Without record in DB you can't see sensors detail info. Temperature from these sensors isn't writing to the database.
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngFor="let group of groupedSensors">
+      <div [class]="SENSOR_COL_CLASS" *ngFor="let sensor of group">
+        <app-connected-sensor [connectedSensor]="sensor"></app-connected-sensor>
+      </div>
+    </div>
+  </section>
+</div>

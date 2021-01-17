@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Sensor } from '../../sensor';
+import { Sensor } from '../../interfaces/sensor';
 
 @Component({
   selector: 'app-sensor',

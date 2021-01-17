@@ -23,11 +23,13 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "allowedCommonJsDependencies": ["chart.js"],
             "styles": [
               "src/styles.css",
               "src/static/css/fontawesome-free/css/all.css",
               "src/static/css/adminlte.min.css",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "src/static/css/ionicons/css/ionicons.min.css"
             ],
             "scripts": [
               "src/static/js/jquery.min.js",

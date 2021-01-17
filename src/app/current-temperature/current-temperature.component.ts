@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Sensor } from '../sensor';
-import { CurrentTempService } from '../current-temp.service';
+import { Sensor } from '../interfaces/sensor';
+import { CurrentTempService } from '../services/current-temp.service';
 
 @Component({
   selector: 'app-current-temperature',
@@ -23,8 +23,9 @@ export class CurrentTemperatureComponent implements OnInit {
     let group = new Array<T[]>();
 ​
     for (let i = 0, j = 0; i < data.length; i++) {
-      if (i >= chunk && i % chunk === 0)
+      if (i >= chunk && i % chunk === 0) {
         j++;
+      }
       group[j] = group[j] || [];
       group[j].push(data[i]);
     }

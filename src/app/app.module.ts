@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ChartComponent } from './temp-history/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { ConnectedSensorsComponent } from './connected-sensors/connected-sensors.component';
+import { ConnectedSensorDetailsComponent } from './connected-sensors/connected-sensor-details/connected-sensor-details.component';
+import { ConnectedSensorComponent } from './connected-sensors/connected-sensor/connected-sensor.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { ChartsModule } from 'ng2-charts';
     SensorComponent,
     TempHistoryComponent,
     HeaderComponent,
-    ChartComponent
+    ChartComponent,
+    ConnectedSensorsComponent,
+    ConnectedSensorDetailsComponent,
+    ConnectedSensorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+<div class="small-box bg-info">
+  <div class="inner">
+    <h5><b>{{connectedSensor.deviceName}}</b></h5>
+    <p><strong>ROM:</strong> {{connectedSensor.rom}}</p>
+    <p><strong>ID in DB:</strong> {{connectedSensor.sensorID}}</p>
+  </div>
+  <div class="icon">
+    <i class="ion ion-outlet"></i>
+  </div>
+  <a *ngIf="isCanShowDetailInfo()" routerLink='/ConnectedSensors/{{connectedSensor.sensorID}}' class="small-box-footer">
+    More info <i class="fas fa-arrow-circle-right"></i>
+  </a>
+</div>
