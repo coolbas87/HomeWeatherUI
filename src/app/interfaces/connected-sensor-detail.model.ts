@@ -1,4 +1,4 @@
-export interface ConnectedSensorDetail {
+export interface ConnectedSensorDetailModel {
   info: string;
   sensorID: number;
   rom: string;

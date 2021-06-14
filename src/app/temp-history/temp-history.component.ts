@@ -9,40 +9,38 @@ import * as moment from 'moment';
   templateUrl: './temp-history.component.html',
   styleUrls: ['./temp-history.component.css']
 })
+
 export class TempHistoryComponent implements OnInit {
   readonly TEXT_CLASS_NAME = 'text-';
-  readonly DATE_FORMAT = 'YYYY-MM-DD';
-  readonly USER_DATE_FORMAT = 'DD.MM.YYYY';
 
-  history: TempHistoryItem[];
-
-  get dateFrom(): any {
-    const from = sessionStorage.getItem('from');
-    return from != null ? from : moment().subtract(7, 'days').format(this.DATE_FORMAT);
-  }
-  @Input() set dateFrom(value: any) {
-    sessionStorage.setItem('from', moment(value).format(this.DATE_FORMAT));
-  }
-
-  get dateTo(): any {
-    const to = sessionStorage.getItem('to');
-    return to != null ? to : moment().format(this.DATE_FORMAT);
-  }
-  @Input() set dateTo(value: any) {
-    sessionStorage.setItem('to', moment(value).format(this.DATE_FORMAT));
-  }
-
-  get dateFromForView(): Date {
-    return moment(this.dateFrom, this.DATE_FORMAT).toDate();
-  }
-
-  get dateToForView(): Date {
-    return moment(this.dateTo, this.DATE_FORMAT).toDate();
-  }
-
+  public loading = false;
+  public history: TempHistoryItem[];
   @Input() id;
+  @Input() dateFrom: Date;
+  @Input() dateTo: Date;
 
-  constructor(private tempHistoryService: TempHistoryService, private route: ActivatedRoute) { }
+  constructor(private tempHistoryService: TempHistoryService, private route: ActivatedRoute) {
+    const from = sessionStorage.getItem('dateFrom');
+    const to = sessionStorage.getItem('dateTo');
+    if (from == null)
+    {
+      this.dateFrom = moment().subtract(7, 'days').toDate();
+      sessionStorage.setItem('dateFrom', this.dateFrom.toISOString());
+    }
+    else
+    {
+      this.dateFrom = moment(from).toDate();
+    }
+    if (to == null)
+    {
+      this.dateTo = moment().toDate();
+      sessionStorage.setItem('dateTo', this.dateTo.toISOString());
+    }
+    else
+    {
+      this.dateTo = moment(to).toDate();
+    }
+  }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('snID');
@@ -68,7 +66,8 @@ export class TempHistoryComponent implements OnInit {
     return this.TEXT_CLASS_NAME + clsName;
   }
 
-  private getHistory() {
+  private getHistory(): void {
+    this.loading = true;
     if (!this.id) {
       this.tempHistoryService.getTempHistory(this.dateFrom, this.dateTo)
         .subscribe(history => {
@@ -80,6 +79,7 @@ export class TempHistoryComponent implements OnInit {
           this.history = history;
         });
     }
+    this.loading = false;
   }
 
   public isShowChart(): boolean {
@@ -88,21 +88,5 @@ export class TempHistoryComponent implements OnInit {
 
   public onShowClick(): void {
     this.getHistory();
-  }
-
-  public onDateFromChange(date: Date): void {
-    if (!date) {
-      this.dateFrom = null;
-    } else {
-      this.dateFrom = date;
-    }
-  }
-
-  public onDateToChange(date: Date): void {
-    if (!date) {
-      this.dateTo = null;
-    } else {
-      this.dateTo = date;
-    }
   }
 }

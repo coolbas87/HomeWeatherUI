@@ -1,11 +1,8 @@
 <div>
   <div style="display: block">
-    <canvas baseChart
-            [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [legend]="lineChartLegend"
-            [chartType]="lineChartType">
-    </canvas>
+    <p-chart type="line"
+             [data]="data"
+             [options]="lineChartOptions"
+    ></p-chart>
   </div>
 </div>

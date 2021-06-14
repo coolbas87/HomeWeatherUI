@@ -1,109 +1,61 @@
-<div class="container-fluid">
-  <section class="content-header">
-    <h4>Temperature History</h4>
-  </section>
-  <section class="content">
-    <!--Params begin-->
-    <div class="card card-info">
-      <div class="card-header">
-        <h6 class="card-title">Search Params</h6>
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="container-left">
-          <div class="row">
-            <label class="col-md-1 col-form-label">From</label>
-            <div class="col-md-2 form-group input-group">
-              <input type="text"
-                     [bsValue]="dateFromForView"
-                     placeholder="From"
-                     #dpFrom="bsDatepicker"
-                     class="form-control"
-                     bsDatepicker
-                     placement="bottom left"
-                     (bsValueChange)="onDateFromChange($event)"
-                     triggers=""
-                     [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
-                    clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
-              <div class="input-group-append">
-                <button class="btn btn-block btn-default" (click)="dpFrom.toggle()"><i class="far fa-calendar-alt"></i></button>
+<div class="p-grid p-flex-column">
+  <div class="p-col">
+    <p-card header="Temperature History">
+      <div class="p-grid p-flex-column">
+        <div class="p-col">
+          <p-panel header="Search Params" [toggleable]="true">
+            <div class="p-col p-fluid p-grid">
+              <div class="p-col-12 p-md-9 p-fluid p-jc-start p-grid p-ml-0 p-px-0 p-py-2">
+                <div class="p-col-12 p-md-5 p-lg-4">
+                  <label for="DateFrom">Date from</label>
+                  <p-calendar [(ngModel)]="dateFrom" dateFormat="dd.mm.yy" [showIcon]="true" inputId="DateFrom"></p-calendar>
+                </div>
+                <div class="p-col-12 p-md-5 p-lg-4">
+                  <label for="DateTo">Date to</label>
+                  <p-calendar [(ngModel)]="dateTo" dateFormat="dd.mm.yy" [showIcon]="true" inputId="DateTo"></p-calendar>
+                </div>
+              </div>
+              <div class="p-col-12 p-md-3 p-mt-md-4">
+                <p-button label="Show" (onClick)="onShowClick()"></p-button>
               </div>
             </div>
-            <label class="col-md-1 col-form-label">To</label>
-            <div class="col-md-2 form-group input-group">
-              <input type="text"
-                     [bsValue]="dateToForView"
-                     placeholder="To"
-                     #dpTo="bsDatepicker"
-                     class="form-control"
-                     bsDatepicker
-                     placement="bottom left"
-                     triggers=""
-                     (bsValueChange)="onDateToChange($event)"
-                     [bsConfig]="{ showWeekNumbers: false, dateInputFormat: USER_DATE_FORMAT, showClearButton: true,
-                    clearPosition: 'right', showTodayButton: true, containerClass: 'theme-dark-blue' }">
-              <div class="input-group-append">
-                <button class="btn btn-block btn-default" (click)="dpTo.toggle()"><i class="far fa-calendar-alt"></i></button>
-              </div>
-            </div>
-            <div class="col-lg-1">
-              <button class="btn btn-block bg-gradient-primary" (click)="onShowClick()">Show</button>
-            </div>
-          </div>
+          </p-panel>
+        </div>
+        <div class="p-col">
+          <p-panel *ngIf="isShowChart()" header="Chart" [toggleable]="true">
+            <app-chart [history]="history"></app-chart>
+          </p-panel>
+        </div>
+        <div class="p-col">
+          <p-panel [toggleable]="true">
+            <p-table
+              [value]="history"
+              [autoLayout]="true"
+              [loading]="loading"
+              [paginator]="true"
+              [rows]="10"
+              styleClass="p-datatable-gridlines
+              p-datatable-striped p-datatable-responsive p-datatable-sm">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Date</th>
+                  <th>Temperature</th>
+                  <th>Sensor name</th>
+                  <th>ROM</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-item>
+                <tr>
+                  <td>{{item.date  | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                  <td [class]="getTextColor(item.temperature)"><b>{{item.temperature  | number:'1.1-1'}}</b></td>
+                  <td><a routerLink='/TempHistory/{{item.snID}}'>{{item.sensors.name}}</a></td>
+                  <td>{{item.sensors.rom}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-panel>
         </div>
       </div>
-    </div>
-    <!--Params end-->
-    <!--Chart begin-->
-    <div *ngIf="isShowChart()" class="card card-info">
-      <div class="card-header">
-        <h6 class="card-title">Chart</h6>
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        <app-chart [history]="history"></app-chart>
-      </div>
-    </div>
-    <!--Chart end-->
-    <!--Table begin-->
-    <div class="card card-info">
-      <div class="card-header">
-        <h6 class="card-title">Result</h6>
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        <table class="table table-striped table-bordered table-responsive-xl">
-          <thead>
-          <tr>
-            <th>Temperature</th>
-            <th>Date</th>
-            <th>Sensor name</th>
-            <th>ROM</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of history">
-            <td [class]="getTextColor(item.temperature)"><b>{{item.temperature  | number:'1.1-1'}}</b></td>
-            <td>{{item.date  | date:'dd.MM.yyyy HH:mm:ss'}}</td>
-            <td><a routerLink='/TempHistory/{{item.snID}}'>{{item.sensors.name}}</a></td>
-            <td>{{item.sensors.rom}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <!--Table end-->
-  </section>
+    </p-card>
+  </div>
 </div>

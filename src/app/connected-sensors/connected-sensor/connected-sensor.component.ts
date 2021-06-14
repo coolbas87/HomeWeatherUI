@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ConnectedSensor} from '../../interfaces/connected-sensor';
+import {ConnectedSensorModel} from '../../interfaces/connected-sensor.model';
 
 @Component({
   selector: 'app-connected-sensor',
@@ -8,7 +8,8 @@ import {ConnectedSensor} from '../../interfaces/connected-sensor';
 })
 export class ConnectedSensorComponent implements OnInit {
 
-  @Input() connectedSensor: ConnectedSensor;
+  @Input() connectedSensor: ConnectedSensorModel;
+  public products: [];
 
   constructor() { }
 

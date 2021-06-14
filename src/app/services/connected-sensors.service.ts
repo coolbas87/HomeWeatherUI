@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-import {ConnectedSensor} from '../interfaces/connected-sensor';
-import {ConnectedSensorDetail} from '../interfaces/connected-sensor-detail';
+import {ConnectedSensorModel} from '../interfaces/connected-sensor.model';
+import {ConnectedSensorDetailModel} from '../interfaces/connected-sensor-detail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +22,16 @@ export class ConnectedSensorsService {
     };
   }
 
-  getConnectedSensors(): Observable<ConnectedSensor[]> {
-    return this.http.get<ConnectedSensor[]>(this.baseUrl + this.connSensorsUrl)
-      .pipe(catchError(this.handleError<ConnectedSensor[]>('getConnectedSensors', []))
+  getConnectedSensors(): Observable<ConnectedSensorModel[]> {
+    return this.http.get<ConnectedSensorModel[]>(this.baseUrl + this.connSensorsUrl)
+      .pipe(catchError(this.handleError<ConnectedSensorModel[]>('getConnectedSensors', []))
       );
   }
 
-  getConnectedSensor(id: number): Observable<ConnectedSensorDetail> {
+  getConnectedSensor(id: number): Observable<ConnectedSensorDetailModel> {
     const url = `${this.baseUrl + this.connSensorsUrl}/${id}`;
-    return this.http.get<ConnectedSensorDetail>(url).pipe(
-      catchError(this.handleError<ConnectedSensorDetail>(`getConnectedSensor id=${id}`))
+    return this.http.get<ConnectedSensorDetailModel>(url).pipe(
+      catchError(this.handleError<ConnectedSensorDetailModel>(`getConnectedSensor id=${id}`))
     );
   }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {ConnectedSensor} from '../interfaces/connected-sensor';
+import {Component, OnInit} from '@angular/core';
+import {ConnectedSensorModel} from '../interfaces/connected-sensor.model';
 import {ConnectedSensorsService} from '../services/connected-sensors.service';
+import {groupArray} from '../common/common-functions';
+import {Message} from 'primeng/api';
 
 @Component({
   selector: 'app-connected-sensors',
@@ -10,35 +12,26 @@ import {ConnectedSensorsService} from '../services/connected-sensors.service';
 export class ConnectedSensorsComponent implements OnInit {
 
   private readonly CHUNK = 3;
-  public readonly SENSOR_COL_CLASS = `col-sm-${12 / this.CHUNK}`;
-  sensors: ConnectedSensor[];
-  groupedSensors: ConnectedSensor[][];
+  public readonly SENSOR_COL_CLASS = `p-col-${12 / this.CHUNK}`;
+  sensors: ConnectedSensorModel[];
+  groupedSensors: ConnectedSensorModel[][];
+  infoMessage: Message[];
 
-  constructor(private connSensorsService: ConnectedSensorsService) { }
+  constructor(private connSensorsService: ConnectedSensorsService) {}
 
   ngOnInit(): void {
+    this.infoMessage = [
+      {severity: 'info', summary: 'Note:', detail: 'All sensors with ID less than 1 are not registered in DB. ' +
+          'Without record in DB you can\'t see sensors detail info. Temperature from these sensors isn\'t writing to the database.'}
+    ];
     this.getConnSensors();
-  }
-
-  groupArray<T>(data: Array<T>, chunk: number): Array<T[]> {
-    let group = new Array<T[]>();
-​
-    for (let i = 0, j = 0; i < data.length; i++) {
-      if (i >= chunk && i % chunk === 0) {
-        j++;
-      }
-      group[j] = group[j] || [];
-      group[j].push(data[i]);
-    }
-​
-    return group;
   }
 
   private getConnSensors(): void {
     this.connSensorsService.getConnectedSensors()
       .subscribe(sensors => {
         this.sensors = sensors;
-        this.groupedSensors = this.groupArray(sensors, this.CHUNK);
+        this.groupedSensors = groupArray(sensors, this.CHUNK);
       });
   }
 

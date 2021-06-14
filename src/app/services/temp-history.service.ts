@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {TempHistoryItem} from '../interfaces/temp-history-item';
-import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,9 @@ export class TempHistoryService {
 
   private historyUrl = '/api/TempHistory';
   baseUrl = environment.baseUrl;
+  readonly DATE_FORMAT = 'YYYY-MM-DD';
 
-  constructor(private http: HttpClient, private datepipe: DatePipe) { }
+  constructor(private http: HttpClient) { }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -23,14 +24,14 @@ export class TempHistoryService {
   }
 
   getTempHistory(from: Date, to: Date): Observable<TempHistoryItem[]> {
-    const url = `${this.baseUrl + this.historyUrl}/${from}/${to}`;
+    const url = `${this.baseUrl + this.historyUrl}/${moment(from).format(this.DATE_FORMAT)}/${moment(to).format(this.DATE_FORMAT)}`;
     return this.http.get<TempHistoryItem[]>(url).pipe(
       catchError(this.handleError<TempHistoryItem[]>(`getTempHistory from=${from} to=${to}`))
     );
   }
 
   getTempHistoryByID(id: number, from: Date, to: Date): Observable<TempHistoryItem[]> {
-    const url = `${this.baseUrl + this.historyUrl}/${id}/${from}/${to}`;
+    const url = `${this.baseUrl + this.historyUrl}/${id}/${moment(from).format(this.DATE_FORMAT)}/${moment(to).format(this.DATE_FORMAT)}`;
     return this.http.get<TempHistoryItem[]>(url).pipe(
       catchError(this.handleError<TempHistoryItem[]>(`getTempHistoryByID id=${id} from=${from} to=${to}`))
     );

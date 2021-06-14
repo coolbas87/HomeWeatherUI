@@ -1,12 +1,21 @@
-<div class="container-fluid">
-  <section class="content-header">
-    <h4>Active sensors</h4>
-  </section>
-  <section class="content">
-    <div class="row" *ngFor="let group of groupedSensors">
-      <div class="col" *ngFor="let sensor of group">
-        <app-sensor [sensor]="sensor"></app-sensor>
+<div class="p-grid p-flex-column">
+  <div class="p-col">
+    <p-panel header="Active sensors">
+      <div class="p-grid" *ngFor="let group of groupedSensors">
+        <div class="p-col-12 p-lg-3" *ngFor="let sensor of group">
+          <app-sensor [sensor]="sensor"></app-sensor>
+        </div>
       </div>
-    </div>
-  </section>
+    </p-panel>
+  </div>
+  <div class="p-col">
+    <p-panel header="Weather forecast" [toggleable]="true">
+      <app-weather-forecast></app-weather-forecast>
+    </p-panel>
+  </div>
+  <div class="p-col">
+    <p-panel header="Weather radar" [toggleable]="true">
+      <iframe src="https://www.rainviewer.com/map.html?loc=49.8797,31.2891,6&oFa=0&oC=0&oU=0&oCS=1&oF=0&oAP=1&rmt=3&c=0&o=83&lm=0&th=0&sm=1&sn=1" width="100%" frameborder="0" style="border:0;height:50vh;" allowfullscreen></iframe>
+    </p-panel>
+  </div>
 </div>
