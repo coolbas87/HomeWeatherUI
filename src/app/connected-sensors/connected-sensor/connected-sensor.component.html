@@ -7,7 +7,13 @@
   <div class="icon">
     <i class="ion ion-outlet"></i>
   </div>
-  <a *ngIf="isCanShowDetailInfo()" routerLink='/ConnectedSensors/{{connectedSensor.sensorID}}' class="small-box-footer">
-    More info <i class="fas fa-arrow-circle-right"></i>
+  <a *ngIf="isCanShowDetailInfo()" (click)="op.toggle($event)" class="small-box-footer">
+    More info <i class="fas fa-arrow-circle-down"></i>
   </a>
 </div>
+
+<p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '450px'}">
+  <ng-template pTemplate>
+    <app-connected-sensor-details [snID]="connectedSensor.sensorID"></app-connected-sensor-details>
+  </ng-template>
+</p-overlayPanel>

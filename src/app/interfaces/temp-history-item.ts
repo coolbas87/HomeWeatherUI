@@ -1,9 +1,9 @@
-import {DbSensor} from './db-sensor';
+import {DbSensorModel} from './db-sensor.model';
 
 export interface TempHistoryItem {
   thID: number;
   snID: number;
-  sensors: DbSensor;
+  sensors: DbSensorModel;
   temperature: number;
   date: Date;
 }

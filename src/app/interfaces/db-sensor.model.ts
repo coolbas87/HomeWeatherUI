@@ -1,4 +1,4 @@
-export interface DbSensor {
+export interface DbSensorModel {
   snID: number;
   name: string;
   rom: string;

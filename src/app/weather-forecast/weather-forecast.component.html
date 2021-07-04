@@ -1,0 +1,86 @@
+<div class="p-grid p-d-flex">
+  <div class="p-col-12 p-md-4 p-d-flex p-grid">
+    <div class="p-col-12">
+      <div class="p-text-center p-text-bold" style="font-size: 1.2em"><i class="pi pi-map-marker p-mr-1"></i>{{forecast.name}}</div>
+    </div>
+    <div class="p-col-12 p-lg-6">
+      <div class="p-d-flex p-flex-column p-text-center">
+        <div class="p-pt-2"><img [src]="weatherImageSrc"></div>
+        <div style="font-size: 1.1rem">{{forecast.current.weatherCondition.name}}</div>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-6">
+      <div class="p-text-center" style="font-size: 3.5rem">{{forecast.current.temp | number:'1.1-1'}}<sup style="font-size: 1.8rem">°C</sup></div>
+    </div>
+  </div>
+  <div class="p-col-12 p-md-8 p-lg-6 p-grid p-d-flex">
+    <div class="p-col-12 p-lg-6">
+      <div class="details-info p-text-center"><i class="pi pi-sun p-mr-1 details-info"></i>Sunrise: {{forecast.current.sunriseDate | date: 'dd.MM.yyyy HH:mm:ss'}}</div>
+    </div>
+    <div class="p-col-12 p-lg-6">
+      <div class="details-info p-text-center"><i class="pi pi-moon p-mr-1 details-info"></i>Sunset: {{forecast.current.sunsetDate | date: 'dd.MM.yyyy HH:mm:ss'}}</div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Feels like</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i class="fas fa-thermometer-three-quarters"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.tempFeelsLike}}°C</div>
+      </div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Wind direction</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i [class]="arrowClass" [style]="rotateArrowStyle"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.windSpeed}} m/s</div>
+      </div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Wind gust</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i class="fas fa-tachometer-alt"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.windGust}} m/s</div>
+      </div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Pressure</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i class="fas fa-cloud-download-alt"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.pressure}} hPa</div>
+      </div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Humidity</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i class="fas fa-tint"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.humidity}}%</div>
+      </div>
+    </div>
+    <div class="p-col-6 p-lg-2">
+      <div class="p-d-flex p-flex-column">
+        <div class="details-info p-text-center">Visibility</div>
+        <div style="font-size: 1.8rem" class="p-text-center"><i class="fas fa-glasses"></i></div>
+        <div class="details-info p-text-center">{{forecast.current.visibility}} m</div>
+      </div>
+    </div>
+  </div>
+  <div class="p-col-12 p-xl-2 p-grid p-d-flex">
+    <div class="p-col-7 p-md-3 p-xl-12">
+      <div class="details-info p-text-center"><i class="fas fa-umbrella-beach details-info p-mr-1"></i>UVI</div>
+    </div>
+    <div class="p-col-12">
+      <div class="p-pl-lg-1 p-pl-xl-4">
+        <rg-gauge-chart
+          [canvasWidth]="canvasWidth"
+          [needleValue]="needleValue"
+          [centralLabel]="centralLabel"
+          [options]="options"
+          [name]="name"
+          [bottomLabel]="bottomLabel">
+        </rg-gauge-chart>
+      </div>
+    </div>
+  </div>
+  <div class="p-col-12 p-ml-2 p-text-right p-text-light details-info">
+    <i class="pi pi-calendar p-mr-1"></i>{{forecast.current.date | date:'dd MMM yyyy HH:mm:ss' }}
+  </div>
+</div>

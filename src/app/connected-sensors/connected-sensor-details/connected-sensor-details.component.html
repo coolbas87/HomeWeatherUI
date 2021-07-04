@@ -1,27 +1,21 @@
-<div class="container pt-5">
-  <div class="row">
-    <div class="col-sm">
-      <div class="small-box bg-info">
-        <div *ngIf="isLoading" class="overlay">
-          <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-        </div>
-        <div *ngIf="isLoading" class="inner">
-          <h5><b> </b></h5>
-          <p><strong>ROM:</strong></p>
-          <p><strong>ID in DB:</strong></p>
-          <p class="mb-0"><strong>Info:</strong></p>
-        </div>
-        <div *ngIf="!isLoading" class="inner">
-          <h5><b>{{connectedSensor.deviceName}}</b></h5>
-          <p><strong>ROM:</strong> {{connectedSensor.rom}}</p>
-          <p><strong>ID in DB:</strong> {{connectedSensor.sensorID}}</p>
-          <p class="mb-0"><strong>Info:</strong></p>
-          <p class="pl-2 text-with-linebreaks">{{connectedSensor.info}}</p>
-        </div>
-        <div class="icon">
-          <i class="ion ion-information"></i>
-        </div>
-      </div>
-    </div>
+<div class="small-box bg-info">
+  <div *ngIf="isLoading" class="overlay">
+    <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+  </div>
+  <div *ngIf="isLoading" class="inner">
+    <h5><b> </b></h5>
+    <p><strong>ROM:</strong></p>
+    <p><strong>ID in DB:</strong></p>
+    <p class="mb-0"><strong>Info:</strong></p>
+  </div>
+  <div *ngIf="!isLoading" class="inner">
+    <h5><b>{{connectedSensor.deviceName}}</b></h5>
+    <p><strong>ROM:</strong> {{connectedSensor.rom}}</p>
+    <p><strong>ID in DB:</strong> {{connectedSensor.sensorID}}</p>
+    <p class="mb-0"><strong>Info:</strong></p>
+    <p class="pl-2 text-with-linebreaks">{{connectedSensor.info}}</p>
+  </div>
+  <div class="icon">
+    <i class="ion ion-information"></i>
   </div>
 </div>

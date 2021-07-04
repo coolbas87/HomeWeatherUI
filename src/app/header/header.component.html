@@ -1,20 +1,5 @@
-<header class="main-header navbar navbar-expand navbar-dark navbar-lightblue" style="margin-left: 0px">
-  <nav class="container-xxl flex-wrap flex-md-nowrap" >
-    <div class="container-fluid">
-      <a routerLink="/" class="navbar-brand p-0 me-2">
-        <i class="fas fa-cloud-sun-rain"></i>
-      </a>
-      <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav pt-2 py-md-0">
-        <li class="nav-item col-4 col-md-auto">
-          <a routerLink="/" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item col-4 col-md-auto">
-          <a routerLink="/TempHistory" class="nav-link">History</a>
-        </li>
-        <li class="nav-item col-sm-4 col-md-auto">
-          <a routerLink="/ConnectedSensors" class="nav-link">Connected sensors</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <i class="fas fa-cloud-sun-rain p-mr-2" style="font-size: 1.3em;"></i>
+  </ng-template>
+</p-menubar>

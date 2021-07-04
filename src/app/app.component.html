@@ -1,6 +1,12 @@
-<div class="wrapper">
-  <app-header></app-header>
-  <router-outlet class="content-wrapper" style="marginLeft: 0"></router-outlet>
+<div class="p-grid p-justify-center p-mt-1">
+  <div class="box p-shadow-12 p-col-11 p-md-10" [ngStyle]="{backgroundColor:'var(--surface-200)'}">
+    <div class="p-grid p-flex-column">
+      <div class="p-col">
+        <app-header></app-header>
+      </div>
+      <div class="p-col">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
-
-

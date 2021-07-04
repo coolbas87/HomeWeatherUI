@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Sensor } from '../interfaces/sensor';
+import { SensorModel } from '../interfaces/sensor.model';
 import { CurrentTempService } from '../services/current-temp.service';
+import {groupArray} from '../common/common-functions';
 
 @Component({
   selector: 'app-current-temperature',
@@ -10,8 +11,8 @@ import { CurrentTempService } from '../services/current-temp.service';
 
 export class CurrentTemperatureComponent implements OnInit {
   readonly chunk = 4;
-  sensors: Sensor[];
-  groupedSensors: Sensor[][];
+  sensors: SensorModel[];
+  groupedSensors: SensorModel[][];
 
   constructor(private curTempService: CurrentTempService) { }
 
@@ -19,25 +20,11 @@ export class CurrentTemperatureComponent implements OnInit {
     this.getSensors();
   }
 
-  groupArray<T>(data: Array<T>, chunk: number): Array<T[]> {
-    let group = new Array<T[]>();
-​
-    for (let i = 0, j = 0; i < data.length; i++) {
-      if (i >= chunk && i % chunk === 0) {
-        j++;
-      }
-      group[j] = group[j] || [];
-      group[j].push(data[i]);
-    }
-​
-    return group;
-  }
-
   private getSensors(): void {
     this.curTempService.getTemperatures()
       .subscribe(sensors => {
         this.sensors = sensors;
-        this.groupedSensors = this.groupArray(sensors, this.chunk);
+        this.groupedSensors = groupArray(sensors, this.chunk);
       });
   }
 }

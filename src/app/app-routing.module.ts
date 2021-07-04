@@ -11,8 +11,7 @@ const routes: Routes = [
   { path: '', component: CurrentTemperatureComponent },
   { path: 'TempHistory/:snID', component: TempHistoryComponent },
   { path: 'TempHistory', component: TempHistoryComponent },
-  { path: 'ConnectedSensors', component: ConnectedSensorsComponent },
-  { path: 'ConnectedSensors/:snID', component: ConnectedSensorDetailsComponent }
+  { path: 'ConnectedSensors', component: ConnectedSensorsComponent }
 ];
 
 @NgModule({

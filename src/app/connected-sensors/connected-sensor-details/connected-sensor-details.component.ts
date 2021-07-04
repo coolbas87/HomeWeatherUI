@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ConnectedSensorsService} from '../../services/connected-sensors.service';
-import {ConnectedSensorDetail} from '../../interfaces/connected-sensor-detail';
+import {ConnectedSensorDetailModel} from '../../interfaces/connected-sensor-detail.model';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -9,14 +9,13 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./connected-sensor-details.component.css']
 })
 export class ConnectedSensorDetailsComponent implements OnInit {
-  snID: number;
-  connectedSensor: ConnectedSensorDetail;
+  @Input() snID: number;
+  connectedSensor: ConnectedSensorDetailModel;
   isLoading = true;
 
   constructor(private connSensorsService: ConnectedSensorsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.snID = +this.route.snapshot.paramMap.get('snID');
     this.getConnSensorInfo(this.snID);
   }
 

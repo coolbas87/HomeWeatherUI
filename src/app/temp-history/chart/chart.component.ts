@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TempHistoryItem} from '../../interfaces/temp-history-item';
 import * as moment from 'moment';
-import {ChartType} from 'chart.js';
 
 @Component({
   selector: 'app-chart',
@@ -16,10 +15,11 @@ export class ChartComponent implements OnInit, OnChanges {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public lineChartLabels = [];
-  public lineChartType: ChartType = 'line';
-  public lineChartLegend = true;
-  public lineChartData = [];
+
+  public data = {
+    labels: [],
+    datasets: []
+  };
 
   constructor() { }
 
@@ -90,18 +90,16 @@ export class ChartComponent implements OnInit, OnChanges {
     this.chartHistory = this.getSensorsHistoryForGraphic();
 
     if ((this.chartHistory == null) || (this.chartHistory.length === 0)) {
-      this.lineChartData = [];
-      this.lineChartLabels = [];
+      this.data.datasets = [];
+      this.data.labels = [];
       return;
     }
 
-    const dataSets = [];
     for (let i = 0; i < this.chartHistory.length; i++) {
-      dataSets.push(this.getDataset(i));
+      this.data.datasets.push(this.getDataset(i));
     }
 
-    this.lineChartData = dataSets;
-    this.lineChartLabels = this.chartHistory[0].dates;
+    this.data.labels = this.chartHistory[0].dates;
   }
 
 }

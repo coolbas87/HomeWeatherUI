@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Sensor } from '../../interfaces/sensor';
+import { SensorModel } from '../../interfaces/sensor.model';
 
 @Component({
   selector: 'app-sensor',
@@ -9,7 +9,7 @@ import { Sensor } from '../../interfaces/sensor';
 export class SensorComponent implements OnInit {
   readonly  SENSOR_CLASS_NAME = 'info-box bg-gradient-';
 
-  @Input() sensor: Sensor;
+  @Input() sensor: SensorModel;
   @Input() isLoading = false;
   sensorClass = this.SENSOR_CLASS_NAME + 'light';
 
